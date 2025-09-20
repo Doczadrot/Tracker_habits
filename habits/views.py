@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django_celery_beat.models import PeriodicTask
 from rest_framework import generics
+from rest_framework.permissions import AllowAny
 
 from habits.models import Habit
 from habits.paginators import HabitPagination
@@ -26,6 +27,7 @@ class HabitCreateAPIView(generics.CreateAPIView):
 
 class PublicHabitListAPIView(generics.ListAPIView):
     serializer_class = PublicHabitSerializer
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
         return Habit.objects.filter(is_public=True)
