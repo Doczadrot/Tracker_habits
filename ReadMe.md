@@ -284,15 +284,23 @@ git push origin main
 | `GET` | `/health/` | Health check | ❌ |
 
 ### Аутентификация
+
+Для работы с приватными эндпоинтами нужен JWT токен:
+
 ```bash
-# Получение токена
-curl -X POST http://localhost/users/login/ \
+# Получение токена (Production)
+curl -X POST http://212.233.79.64/users/login/ \
   -H "Content-Type: application/json" \
   -d '{"email": "user@example.com", "password": "password"}'
 
 # Использование токена
-curl -X GET http://localhost/habits/ \
+curl -X GET http://212.233.79.64/habits/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+
+# Локальная разработка
+curl -X POST http://localhost/users/login/ \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com", "password": "password"}'
 ```
 
 ---
@@ -329,7 +337,10 @@ TRACKER/
 **Иван** - Full Stack Developer
 
 - 🔗 **Репозиторий**: [Tracker_habits](https://github.com/Doczadrot/Tracker_habits)
+- 🌐 **Рабочий сервер**: [http://212.233.79.64/](http://212.233.79.64/)
+- 📚 **API документация**: [http://212.233.79.64/api/schema/swagger/](http://212.233.79.64/api/schema/swagger/)
 - 📧 **Email**: your-email@example.com
+
 
 ---
 
