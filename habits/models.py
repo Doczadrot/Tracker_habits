@@ -83,6 +83,7 @@ class Habit(models.Model):
     time_needed = models.PositiveIntegerField(
         verbose_name="требуемое время",
         help_text="Введите время, необходимое для выполнения привычки, в секундах = 120 секунд.",
+        default=120,
     )
     is_public = models.BooleanField(
         verbose_name="Статус публикации",
