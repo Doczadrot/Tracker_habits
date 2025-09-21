@@ -208,3 +208,6 @@ Thumbs.db
 
 # Local development
 local_settings.py
+
+# Documentation with sensitive data
+docs/
