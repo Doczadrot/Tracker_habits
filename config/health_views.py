@@ -3,12 +3,8 @@
 """
 from django.http import JsonResponse
 from django.db import connection
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
 
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
 def health_check(request):
     """
     Простой health check - проверяет только базовую работоспособность
@@ -19,8 +15,6 @@ def health_check(request):
     })
 
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
 def detailed_health_check(request):
     """
     Более детальный health check - проверяет подключение к БД
