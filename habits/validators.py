@@ -7,26 +7,22 @@ from habits.models import Habit
 
 class HabitValidator:
     def validate_time_needed(self, attrs):
-
         if attrs["time_needed"] > 120:
             raise serializers.ValidationError("Время на выполнение должно быть меньше 2 минут (120 секунд).")
 
     def validate_related_habit(self, attrs):
-
         if attrs.get("related_habit_id"):
             related_habit = Habit.objects.get(pk=attrs.get("related_habit_id"))
             if not related_habit.is_pleasant:
                 raise serializers.ValidationError("В качестве связанной привычки можно выбрать только приятную.")
 
     def validate_reward(self, attrs):
-
         if attrs.get("related_habit_id") and attrs.get("reward"):
             raise serializers.ValidationError(
                 "Нельзя выбрать одновременно связанную привычку и награду. Выберите что-то одно."
             )
 
     def validate_pleasant_habit(self, attrs):
-
         if attrs.get("is_pleasant") and any(
             [attrs.get("related_habit_id"), attrs.get("reward"), attrs.get("frequency"), attrs.get("time")]
         ):
@@ -46,7 +42,6 @@ class HabitValidator:
             )
 
     def validate_end_time(self, attrs):
-
         if attrs.get("frequency") and "x" in attrs.get("frequency") and not attrs.get("end_time"):
             raise serializers.ValidationError(
                 "Для привычки, которая выполняется несколько раз в день, должно быть указано время окончания."
@@ -66,7 +61,6 @@ class HabitValidator:
             raise serializers.ValidationError("Время окончания не может быть раньше или равно времени начала.")
 
     def validate_days_of_week(self, attrs):
-
         if attrs.get("frequency") and "d" in attrs.get("frequency") and not attrs.get("days_of_week"):
             raise serializers.ValidationError(
                 "Для привычки, которая должна выполняться в определённые дни недели, эти дни должны быть выбраны."

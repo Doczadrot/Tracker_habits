@@ -40,15 +40,6 @@ class HabitTestCase(APITestCase):
             is_public=True,
             frequency="m h * * *",
         )
-        self.pleasant_habit = Habit.objects.create(
-            user=self.user,
-            place="Приятное место",
-            action="Приятное действие",
-            is_pleasant=True,
-            time_needed=60,
-            is_public=False,
-            frequency="m h * * *",
-        )
 
     def test_habit_create(self):
         """Тест на создание привычки."""
@@ -86,7 +77,7 @@ class HabitTestCase(APITestCase):
         response = request.json()
 
         self.assertEqual(request.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.get("results")), 3)
+        self.assertEqual(len(response.get("results")), 2)
 
     def test_public_habit_list(self):
         """Тест на получение списка публичных привычек."""
