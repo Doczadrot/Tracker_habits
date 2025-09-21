@@ -2,10 +2,10 @@ from django.db import models
 from config.settings import HABIT_FREQUENCY
 from users.models import User
 
+
 class Week(models.Model):
-
-
     day = models.CharField(max_length=3, verbose_name="день недели")
+
 
 class Habit(models.Model):
 
@@ -24,7 +24,9 @@ class Habit(models.Model):
     )
     time = models.DateTimeField(
         verbose_name="Время",
-        help_text="Введите время, когда нужно выполнять привычку. Если привычка выполняется несколько раз в день, нужно также указать время окончания.",
+        help_text=("Введите время, когда нужно выполнять привычку. Если "
+                   "привычка выполняется несколько раз в день, нужно также "
+                   "указать время окончания."),
         null=True,
         blank=True,
     )
@@ -35,7 +37,9 @@ class Habit(models.Model):
     )
     is_pleasant = models.BooleanField(
         verbose_name="Полезня или нет",
-        help_text="Выберите, является ли привычка приятной. Только приятные привычки могут служить вознаграждением для полезных привычек.",
+        help_text=("Выберите, является ли привычка приятной. Только приятные "
+                   "привычки могут служить вознаграждением для полезных "
+                   "привычек."),
     )
     related_habit = models.ForeignKey(
         "self",
@@ -48,7 +52,9 @@ class Habit(models.Model):
     frequency = models.CharField(
         choices=HABIT_FREQUENCY,
         verbose_name="Частота выполнения ",
-        help_text="Выберите, как часто нужно выполнять полезную привычку. ВНИМАНИЕ! Полезная привычка должна выполняться как минимум раз в неделю. Только для полезных привычек!",
+        help_text=("Выберите, как часто нужно выполнять полезную привычку. "
+                   "ВНИМАНИЕ! Полезная привычка должна выполняться как минимум "
+                   "раз в неделю. Только для полезных привычек!"),
         default="m h * * *",
         blank=True,
         null=True,
@@ -62,7 +68,9 @@ class Habit(models.Model):
     )
     end_time = models.DateTimeField(
         verbose_name="Время окончания",
-        help_text="Введите время, когда нужно в последний раз за день выполнить привычку. Только для полезных привычек, которые выполняются несколько раз в день!",
+        help_text=("Введите время, когда нужно в последний раз за день "
+                   "выполнить привычку. Только для полезных привычек, которые "
+                   "выполняются несколько раз в день!"),
         null=True,
         blank=True,
     )

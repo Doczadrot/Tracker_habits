@@ -32,7 +32,7 @@ def detailed_health_check(request):
             db_status = "ok"
     except Exception as e:
         db_status = f"error: {str(e)}"
-    
+
     return JsonResponse({
         'status': 'ok' if db_status == 'ok' else 'error',
         'database': db_status,

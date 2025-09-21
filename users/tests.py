@@ -29,7 +29,7 @@ class UserTestCase(APITestCase):
         """Тест создания JWT токена."""
         refresh = RefreshToken.for_user(self.user)
         access_token = refresh.access_token
-        
+
         self.assertIsNotNone(access_token)
         self.assertEqual(access_token['user_id'], self.user.id)
 
@@ -41,7 +41,7 @@ class UserTestCase(APITestCase):
             "password": "newpassword123"
         }
         response = self.client.post(url, data, format="json")
-        
+
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(User.objects.filter(email="newuser@example.com").exists())
 
@@ -53,7 +53,7 @@ class UserTestCase(APITestCase):
             "password": "testpassword123"
         }
         response = self.client.post(url, data, format="json")
-        
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("access", response.data)
         self.assertIn("refresh", response.data)
@@ -66,7 +66,7 @@ class UserTestCase(APITestCase):
             "tg_chat_id": "123456789"
         }
         response = self.client.patch(url, data, format="json")
-        
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.user.refresh_from_db()
         self.assertEqual(self.user.tg_chat_id, "123456789")

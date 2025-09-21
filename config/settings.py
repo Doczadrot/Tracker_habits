@@ -129,7 +129,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
-    "http://127.0.0.1:8000", 
+    "http://127.0.0.1:8000",
     "http://localhost",
     "http://127.0.0.1",
     "http://212.233.79.64",
@@ -188,55 +188,3 @@ WEEKDAYS = (
     (5, "Fri"),
     (6, "Sat"),
 )
-
-# Logging configuration
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/app/logs/django.log',
-            'maxBytes': 1024*1024*15,  # 15MB
-            'backupCount': 10,
-            'formatter': 'verbose',
-        },
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
-        },
-    },
-    'root': {
-        'handlers': ['console', 'file'] if not DEBUG else ['console'],
-        'level': 'INFO',
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'file'] if not DEBUG else ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'celery': {
-            'handlers': ['console', 'file'] if not DEBUG else ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'habits': {
-            'handlers': ['console', 'file'] if not DEBUG else ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-    },
-}

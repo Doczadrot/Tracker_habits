@@ -37,11 +37,11 @@ class CeleryTasksTestCase(TestCase):
 
         # Проверяем, что requests.get был вызван
         mock_get.assert_called_once()
-        
+
         # Проверяем параметры вызова
         call_args = mock_get.call_args
         self.assertIn('sendMessage', call_args[0][0])
-        
+
         params = call_args[1]['params']
         self.assertEqual(params['chat_id'], self.user.tg_chat_id)
         self.assertIn(self.habit.action, params['text'])
@@ -59,7 +59,7 @@ class CeleryTasksTestCase(TestCase):
             is_pleasant=True,
             time_needed=30,
         )
-        
+
         # Обновляем основную привычку
         self.habit.related_habit = related_habit
         self.habit.reward = None
@@ -74,7 +74,7 @@ class CeleryTasksTestCase(TestCase):
 
         # Проверяем, что requests.get был вызван
         mock_get.assert_called_once()
-        
+
         # Проверяем параметры вызова
         call_args = mock_get.call_args
         params = call_args[1]['params']
