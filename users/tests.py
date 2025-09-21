@@ -31,7 +31,7 @@ class UserTestCase(APITestCase):
         access_token = refresh.access_token
 
         self.assertIsNotNone(access_token)
-        self.assertEqual(access_token['user_id'], self.user.id)
+        self.assertEqual(int(access_token['user_id']), self.user.id)
 
     def test_user_registration_api(self):
         """Тест регистрации пользователя через API."""
