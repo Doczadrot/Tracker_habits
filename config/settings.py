@@ -78,6 +78,13 @@ DATABASES = {
     }
 }
 
+# Используем SQLite для тестов
+if os.getenv("DATABASE_NAME") == "test_db":
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",
+    }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

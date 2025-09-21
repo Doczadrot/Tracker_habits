@@ -23,6 +23,8 @@ class CeleryTasksTestCase(TestCase):
             reward="Тестовое вознаграждение",
             time_needed=60,
             is_pleasant=False,
+            is_public=True,
+            frequency="m h * * *",
         )
 
     @patch('habits.task.requests.get')
@@ -58,6 +60,8 @@ class CeleryTasksTestCase(TestCase):
             action="Приятное действие",
             is_pleasant=True,
             time_needed=30,
+            is_public=True,
+            frequency="m h * * *",
         )
 
         # Обновляем основную привычку
@@ -96,6 +100,9 @@ class CeleryTasksTestCase(TestCase):
             action="Действие",
             reward="Вознаграждение",
             time_needed=30,
+            is_pleasant=False,
+            is_public=True,
+            frequency="m h * * *",
         )
 
         # Выполняем задачу - не должно падать

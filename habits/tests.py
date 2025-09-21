@@ -16,7 +16,7 @@ class HabitTestCase(APITestCase):
             time="2025-03-30T15:30:00+03:00",
             action="Действие 1",
             is_pleasant=False,
-            frequency="30 15 * * *",
+            frequency="m h * * *",
             reward="Вознаграждение 1",
             time_needed=90,
             is_public=True,
@@ -28,6 +28,7 @@ class HabitTestCase(APITestCase):
             is_pleasant=True,
             time_needed=30,
             is_public=False,
+            frequency="m h * * *",
         )
         self.user2 = User.objects.create(email="user2@user.ru")
         self.pleasant_habit2 = Habit.objects.create(
@@ -37,6 +38,7 @@ class HabitTestCase(APITestCase):
             is_pleasant=True,
             time_needed=30,
             is_public=True,
+            frequency="m h * * *",
         )
         self.pleasant_habit = Habit.objects.create(
             user=self.user,
@@ -45,6 +47,7 @@ class HabitTestCase(APITestCase):
             is_pleasant=True,
             time_needed=60,
             is_public=False,
+            frequency="m h * * *",
         )
 
     def test_habit_create(self):
@@ -56,7 +59,7 @@ class HabitTestCase(APITestCase):
             "time": "2025-03-30T15:30:00+03:00",
             "action": "Действие 1",
             "is_pleasant": False,
-            "frequency": "30 15 * * *",
+            "frequency": "m h * * *",
             "reward": "Вознаграждение 1",
             "time_needed": 90,
             "is_public": True,
@@ -113,7 +116,7 @@ class HabitTestCase(APITestCase):
         """Тест на обновление привычки."""
         url = reverse("habits:habit-update", args=(self.good_habit.pk,))
         body = {
-            "place": "Приятное место 1",
+            "place": "Новое приятное место",
             "time": "2025-03-30T15:30:00+03:00",
             "action": "Действие 1",
             "is_pleasant": False,

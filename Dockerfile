@@ -45,14 +45,16 @@ RUN groupadd -r appuser && useradd -r -g appuser appuser
 WORKDIR /app
 
 # Копируем код приложения
-COPY --chown=appuser:appuser . .
+COPY . .
 
 # Создаем необходимые директории
-RUN mkdir -p /app/static /app/media /app/logs && \
-    chown -R appuser:appuser /app
+RUN mkdir -p /app/static /app/media /app/logs
 
 # Делаем entrypoint скрипт исполняемым
 RUN chmod +x docker-entrypoint.sh
+
+# Устанавливаем права владения
+RUN chown -R appuser:appuser /app
 
 # Переключаемся на непривилегированного пользователя
 USER appuser
@@ -65,7 +67,7 @@ HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/health/ || exit 1
 
 # Устанавливаем entrypoint
-ENTRYPOINT ["./docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "./docker-entrypoint.sh"]
 
 # Команда по умолчанию
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "30", "--keep-alive", "2", "config.wsgi:application"]

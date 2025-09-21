@@ -35,7 +35,7 @@ class UserTestCase(APITestCase):
 
     def test_user_registration_api(self):
         """Тест регистрации пользователя через API."""
-        url = reverse("users:register")
+        url = reverse("users:create_user")
         data = {
             "email": "newuser@example.com",
             "password": "newpassword123"
@@ -47,7 +47,7 @@ class UserTestCase(APITestCase):
 
     def test_user_login_api(self):
         """Тест входа пользователя через API."""
-        url = reverse("users:token_obtain_pair")
+        url = reverse("users:user_login")
         data = {
             "email": "test@example.com",
             "password": "testpassword123"
@@ -61,7 +61,7 @@ class UserTestCase(APITestCase):
     def test_user_profile_update(self):
         """Тест обновления профиля пользователя."""
         self.client.force_authenticate(user=self.user)
-        url = reverse("users:user-detail", args=(self.user.pk,))
+        url = reverse("users:user-detail")
         data = {
             "tg_chat_id": "123456789"
         }
