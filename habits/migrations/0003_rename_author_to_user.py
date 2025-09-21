@@ -17,17 +17,6 @@ class Migration(migrations.Migration):
             "ALTER TABLE habits_habit RENAME COLUMN author_id TO user_id;",
             reverse_sql="ALTER TABLE habits_habit RENAME COLUMN user_id TO author_id;"
         ),
-        # Update the field definition
-        migrations.AlterField(
-            model_name='habit',
-            name='author',
-            field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE,
-                related_name='habits',
-                to='users.user',
-                verbose_name='Пользователь'
-            ),
-        ),
         # Rename the field
         migrations.RenameField(
             model_name='habit',
