@@ -14,13 +14,13 @@ def send_message(pk) -> None:
     if not habit.user.tg_chat_id:
         return
 
-    reward_text = habit.reward if habit.reward else (habit.related_habit.action if habit.related_habit else "")
+    reward_text = habit.reward if habit.reward else (habit.related_habit.action if habit.related_habit else '')
     text = (
         f"Пришло время сделать '{habit.action}' в '{habit.place}'! "
         f"Не забудьте '{reward_text}' после."
     )
     params = {
-        "text": text,
-        "chat_id": habit.user.tg_chat_id,
+        'text': text,
+        'chat_id': habit.user.tg_chat_id,
     }
-    requests.get(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage", params=params)
+    requests.get(f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage', params=params)
