@@ -9,11 +9,11 @@ from habits.models import Habit
 def send_message(pk) -> None:
     """Отправляет напоминания в телеграм пользователя."""
     habit = Habit.objects.get(pk=pk)
-    
+
     # Проверяем, есть ли у пользователя tg_chat_id
     if not habit.user.tg_chat_id:
         return
-    
+
     reward_text = habit.reward if habit.reward else (habit.related_habit.action if habit.related_habit else "")
     text = (
         f"Пришло время сделать '{habit.action}' в '{habit.place}'! "
